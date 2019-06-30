@@ -5,7 +5,7 @@
 pdsnd_github
 
 ### Description
-Describe what your project is about and what it does
+This project does not share bikes; it provides information about bike usage instead.
 
 ### Files used
 Include the files used
