@@ -1,6 +1,6 @@
-import time
 import pandas as pd
 import numpy as np
+import time
 
 CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
@@ -16,7 +16,7 @@ def get_filters():
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('Hellow! Let\'s explore some US bikeshare data!')
-    
+
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
 
     city_valid = False
@@ -27,13 +27,13 @@ def get_filters():
 
       if city.lower() == 'chicago':
         print('\nLet\'s see data for Chicago.')
-    
+
       elif city.lower() == 'washington':
         print('\nLet\'s see data for Washington.')
-    
+
       elif city.lower() == 'new york city':
         print('\nLet\'s see data for New York City.')
-    
+
       else:
         print('\nYou provided an invalid input. Please try again\n')
         city_valid = False
@@ -43,7 +43,7 @@ def get_filters():
     time_valid = False
     while time_valid == False:
       time_valid = True
-    
+
       time_filter = input("\nWhat would you like to filter data for: Month, Day, or None?\n")
 
       if time_filter.lower() == 'month':
@@ -59,7 +59,7 @@ def get_filters():
         while (day=='monday' or day=='tuesday' or day=='wednesday' or day=='thursday' or day=='friday' or day=='saturday' or day=='sunday') == False:
           print('\nInvalid day. Please try again\n')
           day = input("\nPlease select a day: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.\n").lower()
-  
+
       elif (time_filter.lower() == 'none'):
         month = 'all'
         day = 'all'
@@ -269,7 +269,7 @@ def user_stats(df, month, city, day):
         print('\nThe most recent birth year:\n', max_birthyear)
         common_birthyear = month_data['Birth Year'].mode()[0]
         print('\nThe most common birth year:\n', common_birthyear)
-      
+
       if day != 'all':
         print('Filtering by day of the week, {}.'.format(day.title()))
         user_types = day_data['User Type'].value_counts()
@@ -282,7 +282,7 @@ def user_stats(df, month, city, day):
         print('\nThe most recent birth year:\n', max_birthyear)
         common_birthyear = day_data['Birth Year'].mode()[0]
         print('\nThe most common birth year:\n', common_birthyear)
-      
+
       if month == 'all' and day == 'all':
         print('Applying no filters')
         user_types = df['User Type'].value_counts()
@@ -304,31 +304,31 @@ def user_stats(df, month, city, day):
   print('-'*40)
 
 def get_raw(dtf):
-  
+
   raw_valid = False
   raw_yn = input('Would you like to see raw data first?\n').lower()
   n = 0
 
   while raw_valid == False:
-    raw_valid = True  
-    
+    raw_valid = True
+
     if raw_yn.lower() == 'yes':
       print('\nLet\'s see the raw data.')
       print(dtf[n:n+5])
       raw_yn = input('Would you like to see more raw data?\n').lower()
       raw_valid = False
       n = n + 5
-  
+
     elif raw_yn.lower() == 'no':
       return()
-    
+
     else:
       raw_yn = input('\nYou provided an invalid input.\nPlease try again: ').lower()
       raw_valid = False
 
 def main():
   while True:
-    
+
     city, month, day = get_filters()
     # city = 'chicago'
     # month = 'all'
@@ -340,9 +340,9 @@ def main():
     # day = 'saturday'
     # day = 'sunday'
     df = load_data(city, month, day)
-    
+
     get_raw(df)
-    
+
     time_stats(df, month, day)
     station_stats(df, month, day)
     trip_duration_stats(df, month, day)
